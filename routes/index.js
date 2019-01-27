@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
+let query = require("../db/query");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', async (req, res, next) => {
+    let example = await query.execute("select * from player");
+    res.render('index', { data: example.rows });
 });
 
 module.exports = router;
