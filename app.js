@@ -46,6 +46,7 @@ app.use('/profile/stats', profileStatsRouter);
 app.use('/game/create_table', gameCreateTableRouter);
 app.use('/game/home', gameHomeRouter);
 app.use('/game/join_table', gameJoinTableRouter);
+//TODO - Выяснить реализацию апи данного типа контейнеров
 app.use('/game/table', gameTableRouter);
 
 // Выброс 404 ошибки в случае Exception
