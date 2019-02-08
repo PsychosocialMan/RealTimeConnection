@@ -6,9 +6,18 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
 let indexRouter = require('./routes/index');
-let authorizationRouter = require('./routes/authorization');
-let registrationRouter = require('./routes/registration');
-let createTableRouter = require('./routes/create_table');
+
+let profileAuthorizationRouter = require('./routes/profile/authorization');
+let profileRegistrationRouter = require('./routes/profile/registration');
+let profileFindFriendsRouter = require('./routes/profile/find_friends');
+let profileHomeRouter = require('./routes/profile/home');
+let profileStatsRouter = require('./routes/profile/stats');
+
+let gameCreateTableRouter = require('./routes/game/create_table');
+let gameHomeRouter = require('./routes/game/home');
+let gameJoinTableRouter = require('./routes/game/join_table');
+let gameTableRouter = require('./routes/game/table');
+
 let usersRouter = require('./routes/users');
 
 let app = express();
@@ -28,9 +37,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Определение соответствия роутера и REST-маршрута
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/registration', registrationRouter);
-app.use('/authorization', authorizationRouter);
-app.use('/create_table', createTableRouter);
+app.use('/profile/registration', profileRegistrationRouter);
+app.use('/profile/authorization', profileAuthorizationRouter);
+app.use('/profile/find_friends', profileFindFriendsRouter);
+app.use('/profile/home', profileHomeRouter);
+app.use('/profile/stats', profileStatsRouter);
+
+app.use('/game/create_table', gameCreateTableRouter);
+app.use('/game/home', gameHomeRouter);
+app.use('/game/join_table', gameJoinTableRouter);
+app.use('/game/table', gameTableRouter);
 
 // Выброс 404 ошибки в случае Exception
 app.use(function (req, res, next) {
