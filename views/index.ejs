@@ -1,12 +1,14 @@
 <!doctype html>
 <html>
-<head>
-    <title>Авторизация</title>
-</head>
-<body>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/javascripts/socket.js"></script>
-<div id="data"></div>
-<div><%= data %></div>
-</body>
+    <head>
+        <title>Карточная игра "Козел"</title>
+    </head>
+    <body>
+        <div class="header">Добро пожаловать в карточную игру "Козел"</div>
+        <ul>
+            <li><a class="menu_button" href="/registration">Зарегестрироваться</a></li>
+            <li><a class="active_button" href="/authorization">Войти</a></li>
+            <li><a class="menu_button" href="/create_table">Продолжить как анонимный пользователь</a> </li>
+        </ul>
+    </body>
 </html>
