@@ -3,6 +3,8 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let path = require('path');
 let cookieParser = require('cookie-parser');
+let expressSession = require('express-session');
+let passport = require('passport');
 let logger = require('morgan');
 
 let indexRouter = require('./routes/index');
@@ -31,6 +33,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(expressSession({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
 // Использование статических скриптов
 app.use(express.static(path.join(__dirname, 'public')));
 

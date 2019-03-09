@@ -3,6 +3,7 @@ let config = require("./config/db-config");
 
 function execute(statement, binds = [], opts = {}) {
     return new Promise(async (resolve, reject) => {
+        opts.outFormat = oracledb.OBJECT;
         opts.autoCommit = true;
         let connection;
         try {
@@ -24,5 +25,5 @@ function execute(statement, binds = [], opts = {}) {
     });
 }
 
-module.exports.execute = execute;
+module.exports = execute;
 
