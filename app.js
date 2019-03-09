@@ -4,7 +4,6 @@ let bodyParser = require('body-parser');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let expressSession = require('express-session');
-let passport = require('passport');
 let logger = require('morgan');
 
 let indexRouter = require('./routes/index');
@@ -27,6 +26,8 @@ let app = express();
 // Настройка View
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+
 
 app.use(bodyParser.json());
 app.use(logger('dev'));
