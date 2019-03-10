@@ -5,6 +5,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let expressSession = require('express-session');
 let logger = require('morgan');
+let sqlInjection = require('sql-injection');
 
 let indexRouter = require('./routes/index');
 
@@ -13,6 +14,7 @@ let profileRegistrationRouter = require('./routes/profile/registration');
 let profileFindFriendsRouter = require('./routes/profile/find_friends');
 let profileHomeRouter = require('./routes/profile/home');
 let profileStatsRouter = require('./routes/profile/stats');
+let profileAnonymousRouter = require('./routes/profile/anonymous');
 
 let gameCreateTableRouter = require('./routes/game/create_table');
 let gameHomeRouter = require('./routes/game/home');
@@ -27,8 +29,7 @@ let app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
-
+app.use(sqlInjection);
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
@@ -50,6 +51,7 @@ app.use('/profile/authorization', profileAuthorizationRouter);
 app.use('/profile/find_friends', profileFindFriendsRouter);
 app.use('/profile/home', profileHomeRouter);
 app.use('/profile/stats', profileStatsRouter);
+app.use('/profile/anonymous', profileAnonymousRouter);
 
 app.use('/game/create_table', gameCreateTableRouter);
 app.use('/game/home', gameHomeRouter);
