@@ -9,19 +9,8 @@ let sqlInjection = require('sql-injection');
 
 let indexRouter = require('./routes/index');
 
-let profileAuthorizationRouter = require('./routes/profile/authorization');
-let profileRegistrationRouter = require('./routes/profile/registration');
-let profileFindFriendsRouter = require('./routes/profile/find_friends');
-let profileHomeRouter = require('./routes/profile/home');
-let profileStatsRouter = require('./routes/profile/stats');
-let profileAnonymousRouter = require('./routes/profile/anonymous');
-
-let gameCreateTableRouter = require('./routes/game/create_table');
-let gameHomeRouter = require('./routes/game/home');
-let gameJoinTableRouter = require('./routes/game/join_table');
-let gameTableRouter = require('./routes/game/table');
-
-let usersRouter = require('./routes/users');
+let profileRouter = require('./routes/profile');
+let gameRouter = require('./routes/game');
 
 let app = express();
 
@@ -29,8 +18,8 @@ let app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(sqlInjection);
 app.use(bodyParser.json());
+app.use(sqlInjection);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -45,19 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Определение соответствия роутера и REST-маршрута
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/profile/registration', profileRegistrationRouter);
-app.use('/profile/authorization', profileAuthorizationRouter);
-app.use('/profile/find_friends', profileFindFriendsRouter);
-app.use('/profile/home', profileHomeRouter);
-app.use('/profile/stats', profileStatsRouter);
-app.use('/profile/anonymous', profileAnonymousRouter);
-
-app.use('/game/create_table', gameCreateTableRouter);
-app.use('/game/home', gameHomeRouter);
-app.use('/game/join_table', gameJoinTableRouter);
-//TODO - Выяснить реализацию апи данного типа контейнеров
-app.use('/game/table', gameTableRouter);
+app.use('/profile', profileRouter);
+app.use('/game', gameRouter);
 
 // Выброс 404 ошибки в случае Exception
 app.use(function (req, res, next) {
